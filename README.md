@@ -1,56 +1,137 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Buffer — Your Little Corner of the Internet
 
-## Get started
+Buffer is a personal save-for-later mobile app for storing useful notes, links, code snippets, and images in one place.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- Save notes, links, snippets, and images.
+- Browse all saved items or filter by category.
+- Search items by title, content, and tags.
+- Add tags to organize saved content.
+- Edit saved items.
+- Archive items and restore them later.
+- Delete items with confirmation.
+- Preview saved images.
+- Store data locally on the device.
+- Dark interface with blue accents.
 
-2. Start the app
+## Technology Stack
 
-   ```bash
-   npx expo start
-   ```
+- React Native
+- Expo
+- TypeScript
+- AsyncStorage
+- Expo Go
+- EAS Build
 
-In the output, you'll find options to open the app in a
+## Architecture
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Buffer uses a local-first architecture. The mobile app manages saved items and stores them on the device using AsyncStorage. Stage 1 does not require authentication or a remote backend.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```mermaid
+flowchart TD
+    A[User] --> B[Buffer Mobile App]
+    B --> C[Create and Edit Items]
+    B --> D[Browse and Search]
+    B --> E[Tags and Categories]
+    B --> F[Archive and Restore]
+    C --> G[AsyncStorage]
+    D --> G
+    E --> G
+    F --> G
+    G --> H[Items Stored Locally]
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Data Model
 
-### Other setup steps
+Each saved item contains:
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+| Field | Description |
+|---|---|
+| `id` | Unique item identifier |
+| `type` | `note`, `link`, `snippet`, or `image` |
+| `title` | Item title |
+| `content` | Saved text, URL, snippet, or image URI |
+| `tags` | List of tags |
+| `createdAt` | Creation timestamp |
+| `updatedAt` | Last updated timestamp |
+| `archived` | Whether the item is archived |
 
-## Learn more
+## Local Storage
 
-To learn more about developing your project with Expo, look at the following resources:
+Buffer uses `@react-native-async-storage/async-storage` to save items locally on the device.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Storage key: `pocketinbox.items.v1`
 
-## Join the community
+No account or remote backend is required for Stage 1. Data is stored locally and is not automatically synchronized across devices.
 
-Join our community of developers creating universal apps.
+## Getting Started
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Prerequisites
+
+- Node.js
+- npm
+- Expo Go on a compatible mobile device, or an appropriate development environment
+
+### Install Dependencies
+
+Open a terminal in the project directory and run:
+
+```bash
+npm install
+```
+
+### Start the App
+
+```bash
+npx expo start
+```
+
+On Windows PowerShell, if `npx` is blocked by the execution policy, use:
+
+```powershell
+npx.cmd expo start
+```
+
+Open the project in Expo Go or another supported development environment.
+
+## Android APK Build
+
+The project can be built for Android using Expo Application Services (EAS Build).
+
+Run:
+
+```powershell
+npx.cmd eas-cli@latest build --platform android --profile preview
+```
+
+Follow any prompts to sign in or configure EAS.
+
+After the build completes, use the APK link provided by EAS to download and install the application.
+
+**APK download link:** Replace this line with the actual EAS APK link after the build succeeds.
+
+## Project Status
+
+**Stage 1 — Local save-for-later app**
+
+The app focuses on saving, finding, editing, organizing, archiving, restoring, and deleting content on a single device.
+
+## Current Limitations
+
+- No authentication.
+- No cloud synchronization.
+- Saved data is device-specific.
+- Image availability can depend on the image URL or URI and device permissions.
+
+## Possible Future Improvements
+
+- Optional private cloud synchronization.
+- Share-sheet integration for saving content from other apps.
+- Import and export functionality.
+- Additional organization and filtering options.
+
+## License
+
+Created for a mobile app development challenge. No separate open-source license has been specified.
