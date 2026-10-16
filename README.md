@@ -110,7 +110,7 @@ Follow any prompts to sign in or configure EAS.
 
 After the build completes, use the APK link provided by EAS to download and install the application.
 
-**APK download link:** Replace this line with the actual EAS APK link after the build succeeds.
+**APK download link:** [Download Buffer for Android](https://expo.dev/artifacts/eas/W-YUvILfuwRs2GlYPzPxMwex72Kld6pw_DnH3OpdICg.apk)
 
 ## Project Status
 
